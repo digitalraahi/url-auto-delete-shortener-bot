@@ -383,10 +383,13 @@ async def get_shortlink(link):
     if "http" == https:
         https = "https"
         link = link.replace("http", https)
-    url = f'https://omegalinks.in/api'
-    params = {'api': URL_SHORTNER_WEBSITE_API,
-              'url': link,
-              }
+    
+    url = 'https://api.shareus.io/direct_link'
+    params = {
+        'api_key': 'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+        'pages': 3,
+        'link': link
+    }
 
     try:
         async with aiohttp.ClientSession() as session:
@@ -396,8 +399,8 @@ async def get_shortlink(link):
                     return data['shortenedUrl']
                 else:
                     logger.error(f"Error: {data['message']}")
-                    return f'https://{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
+                    return f'https://api.shareus.io/direct_link?api_key=vgjqONt0HUd63BlvCIT1HjaqJCa2&pages=3&link={link}'
 
     except Exception as e:
         logger.error(e)
-        return f'{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
+        return f'https://api.shareus.io/direct_link?api_key=vgjqONt0HUd63BlvCIT1HjaqJCa2&pages=3&link={link}'
