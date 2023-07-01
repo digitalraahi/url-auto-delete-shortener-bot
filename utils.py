@@ -387,7 +387,7 @@ async def get_shortlink(link):
     url = 'https://api.shareus.io/direct_link'
     params = {
         'api_key': 'vgjqONt0HUd63BlvCIT1HjaqJCa2',
-        'pages': 3,
+        'pages': 6,
         'link': link
     }
 
