@@ -7,7 +7,9 @@ from pyrogram.types import Message, InlineKeyboardButton
 from pyrogram import enums
 from typing import Union
 import re
+import random
 import os
+import aiohttp
 from datetime import datetime
 from typing import List
 from database.users_chats_db import db
@@ -378,15 +380,31 @@ def humanbytes(size):
         n += 1
     return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
 
+
+
+
+API_KEYS = [
+    'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+    'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+    'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+    'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+    'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+    'AAbc123456789',
+    'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+    'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+    'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+    'vgjqONt0HUd63BlvCIT1HjaqJCa2'
+]
+
 async def get_shortlink(link):
     https = link.split(":")[0]
     if "http" == https:
         https = "https"
         link = link.replace("http", https)
-    
+
     url = 'https://api.shareus.io/direct_link'
     params = {
-        'api_key': 'vgjqONt0HUd63BlvCIT1HjaqJCa2',
+        'api_key': random.choice(API_KEYS),
         'pages': 6,
         'link': link
     }
@@ -399,8 +417,8 @@ async def get_shortlink(link):
                     return data['shortenedUrl']
                 else:
                     logger.error(f"Error: {data['message']}")
-                    return f'https://api.shareus.io/direct_link?api_key=vgjqONt0HUd63BlvCIT1HjaqJCa2&pages=3&link={link}'
+                    return f'https://api.shareus.io/direct_link?api_key={params["api_key"]}&pages=3&link={link}'
 
     except Exception as e:
         logger.error(e)
-        return f'https://api.shareus.io/direct_link?api_key=vgjqONt0HUd63BlvCIT1HjaqJCa2&pages=3&link={link}'
+        return f'https://api.shareus.io/direct_link?api_key={params["api_key"]}&pages=3&link={link}'
